@@ -11,6 +11,7 @@ import { HeroService }  from '../hero.service';
   styleUrls: [ './hero-detail.component.css' ]
 })
 export class HeroDetailComponent implements OnInit {
+  showAlert: boolean = false;
   @Input() hero: Hero;
 
   constructor(
@@ -34,7 +35,12 @@ export class HeroDetailComponent implements OnInit {
   }
 
  save(): void {
-    this.heroService.updateHero(this.hero)
-      .subscribe(() => this.goBack());
+    if(this.hero.age >= 18 && this.hero.age <= 500) {
+      this.heroService.updateHero(this.hero)
+        .subscribe(() => this.goBack());
+      this.showAlert = false;
+    } else {
+      this.showAlert = true;
+    }
   }
 }

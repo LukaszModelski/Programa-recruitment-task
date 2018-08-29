@@ -2,10 +2,14 @@
   <h2>{{hero.name | uppercase}} Details</h2>
   <div><span>id: </span>{{hero.id}}</div>
   <div>
-    <label>name:
+    <label class="d-block">name:
       <input [(ngModel)]="hero.name" placeholder="name"/>
     </label>
+    <label class="d-block">age:
+      <input [(ngModel)]="hero.age" placeholder="age"/>
+    </label>
   </div>
+  <p *ngIf="showAlert" class="red">Hero must be at least 18 years old, and cannot be older that 500 years</p>
   <button (click)="goBack()">go back</button>
   <button (click)="save()">save</button>
 </div>

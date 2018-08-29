@@ -10,6 +10,9 @@ import { HeroService } from '../hero.service';
 })
 export class HeroesComponent implements OnInit {
   heroes: Hero[];
+  showAlert: boolean = false;
+  inputName: string = '';
+  inputAge: string = '';
 
   constructor(private heroService: HeroService) { }
 
@@ -22,10 +25,18 @@ export class HeroesComponent implements OnInit {
     .subscribe(heroes => this.heroes = heroes);
   }
 
-  add(name: string): void {
+  add(name: string, age: number): void {
     name = name.trim();
     if (!name) { return; }
-    this.heroService.addHero({ name } as Hero)
+    if (age && (age < 18 || age > 500)) {
+      this.showAlert = true;
+      return;
+    } else {
+      this.showAlert = false;
+      this.inputName = '';
+      this.inputAge = '';
+    }
+    this.heroService.addHero({ name, age } as Hero)
       .subscribe(hero => {
         this.heroes.push(hero);
       });

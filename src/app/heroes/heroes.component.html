@@ -2,18 +2,23 @@
 
 <div>
   <label>Hero name:
-    <input #heroName />
+    <input [(ngModel)]="inputName" #ctrl="ngModel"/>
+  </label>
+  <label>Hero age:
+    <input type="number" [(ngModel)]="inputAge" #ctrl="ngModel" />
   </label>
   <!-- (click) passes input value to add() and then clears the input -->
-  <button (click)="add(heroName.value); heroName.value=''">
+  <!-- <button (click)="add(heroName.value, heroAge.value); heroName.value=''; heroAge.value=''"> -->
+  <button (click)="add(inputName, inputAge);">
     add
   </button>
+  <p *ngIf="showAlert" class="red">Hero must be at least 18 years old, and cannot be older that 500 years</p>
 </div>
 
 <ul class="heroes">
   <li *ngFor="let hero of heroes">
     <a routerLink="/detail/{{hero.id}}">
-      <span class="badge">{{hero.id}}</span> {{hero.name}}
+      <span class="badge">{{hero.id}}</span> {{hero.name}} <span class="blue" *ngIf="hero.age"> age: {{hero.age}}</span>
     </a>
     <button class="delete" title="delete hero"
       (click)="delete(hero)">x</button>
