@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { isDevMode } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  isDevMode: boolean = isDevMode();
   title = 'Tour of Heroes';
 }

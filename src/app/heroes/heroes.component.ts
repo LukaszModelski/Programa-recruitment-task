@@ -12,7 +12,7 @@ export class HeroesComponent implements OnInit {
   heroes: Hero[];
   showAlert: boolean = false;
   inputName: string = '';
-  inputAge: string = '';
+  inputAge: number;
 
   constructor(private heroService: HeroService) { }
 
@@ -34,7 +34,7 @@ export class HeroesComponent implements OnInit {
     } else {
       this.showAlert = false;
       this.inputName = '';
-      this.inputAge = '';
+      this.inputAge = undefined;
     }
     this.heroService.addHero({ name, age } as Hero)
       .subscribe(hero => {
