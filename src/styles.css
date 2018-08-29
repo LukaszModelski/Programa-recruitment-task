@@ -80,3 +80,7 @@ nav a.active {
 .d-block {
   display: block;
 }
+.active-route {
+  font-weight: 700;
+  border: 1px solid lightgray;
+}
