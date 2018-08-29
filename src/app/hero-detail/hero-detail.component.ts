@@ -35,7 +35,7 @@ export class HeroDetailComponent implements OnInit {
   }
 
  save(): void {
-    if(this.hero.age >= 18 && this.hero.age <= 500) {
+    if(!this.hero.age || (this.hero.age >= 18 && this.hero.age <= 500)) {
       this.heroService.updateHero(this.hero)
         .subscribe(() => this.goBack());
       this.showAlert = false;
@@ -43,4 +43,5 @@ export class HeroDetailComponent implements OnInit {
       this.showAlert = true;
     }
   }
+
 }

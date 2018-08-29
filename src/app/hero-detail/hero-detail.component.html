@@ -9,6 +9,11 @@
       <input [(ngModel)]="hero.age" placeholder="age"/>
     </label>
   </div>
+  <div *ngIf="hero.age" [ngSwitch]="true" class="lvlSwitchContainer">
+    <p *ngSwitchCase="hero.age < 100">Hero lvl: <span class="green">junior</span></p>
+    <p *ngSwitchCase="hero.age >= 100 && hero.age < 250">Hero lvl: <span class="black">professional</span></p>
+    <p *ngSwitchCase="hero.age >= 250">Hero lvl: <span class="blue">expert</span></p>
+  </div>
   <p *ngIf="showAlert" class="red">Hero must be at least 18 years old, and cannot be older that 500 years</p>
   <button (click)="goBack()">go back</button>
   <button (click)="save()">save</button>

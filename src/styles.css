@@ -71,6 +71,12 @@ nav a.active {
 .blue {
   color: #00f;
 }
+.green {
+  color: #0f0;
+}
+.black {
+  color: #000;
+}
 .d-block {
   display: block;
 }
