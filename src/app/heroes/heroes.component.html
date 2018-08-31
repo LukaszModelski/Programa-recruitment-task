@@ -18,9 +18,17 @@
 <ul class="heroes">
   <li *ngFor="let hero of heroes">
     <a routerLink="/detail/{{hero.id}}">
-      <span class="badge">{{hero.id}}</span> {{hero.name}} <span class="blue" *ngIf="hero.age"> age: {{hero.age}}</span>
+      <span class="badge">{{hero.id}} </span>
+      {{hero.name}}
+      <span *ngIf="hero.age">, age: {{hero.age}}</span>
+      <span [ngSwitch]="true" *ngIf="hero.age">
+        <span *ngSwitchCase="hero.age < 100" class="green">, lvl: junior</span>
+        <span *ngSwitchCase="hero.age >= 100 && hero.age < 250" class="black">, lvl: professional</span>
+        <span *ngSwitchCase="hero.age >= 250" class="blue">, lvl: expert</span>
+      </span>
     </a>
     <button class="delete" title="delete hero"
       (click)="delete(hero)">x</button>
   </li>
 </ul>
+<p>Total number of heroes is: {{heroes.length}}</p>

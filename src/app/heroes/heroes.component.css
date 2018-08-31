@@ -3,7 +3,7 @@
   margin: 0 0 2em 0;
   list-style-type: none;
   padding: 0;
-  width: 300px;
+  width: 380px;
 }
 .heroes li {
   position: relative;
@@ -26,7 +26,7 @@
   text-decoration: none;
   position: relative;
   display: block;
-  width: 250px;
+  width: auto;
 }
 
 .heroes a:hover {
