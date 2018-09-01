@@ -31,4 +31,4 @@
       (click)="delete(hero)">x</button>
   </li>
 </ul>
-<p>Total number of heroes is: {{heroes.length}}</p>
+<p *ngIf="heroes">Total number of heroes is: {{heroes.length}}</p>
