@@ -16,7 +16,7 @@ Direct link: https://angular.io/generated/zips/toh-pt6/toh-pt6.zip
     - show a red message next to the age edit control
   - age isn't presented on the list of heroes
   - the age value is optional
-  
+
 ### Hero experience
 
 - As a User I want to see the hero's experience on the hero's details screen
@@ -26,11 +26,11 @@ Direct link: https://angular.io/generated/zips/toh-pt6/toh-pt6.zip
     - professional for age >=100 and <250
     - expert for age >=250
     - undetermined for empty age
-    
+
 ### Messages section
 - As a User I don't want to see the messages section on the production environment
   - keep it for development only
-  
+
 ### Navbar buttons
 - As a User I want the current navigation button to be highlighted
   - for route `/dashboard` button Dashboard should be highlighted
@@ -54,7 +54,7 @@ Direct link: https://angular.io/generated/zips/toh-pt6/toh-pt6.zip
   - content: "Total number of heroes is: x."
 
 ### changes in progress
-- As a User I want the unsaved data to be protected 
+- As a User I want the unsaved data to be protected
   - all route changing operations (like nav bar or back button) should check for unsaved data
   - checking should work for changing details and adding new hero
   - the simple confirmation message should be displayed, like so: "Your data could be lost, are you sure? (yes/no)"
