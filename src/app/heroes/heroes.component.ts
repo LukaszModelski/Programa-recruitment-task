@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 
 import { Hero } from '../hero';
 import { HeroService } from '../hero.service';
+import { CanDeactivateGuard } from '../can-deactivate-guard.service';
+
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-heroes',
@@ -14,10 +17,18 @@ export class HeroesComponent implements OnInit {
   inputName: string = '';
   inputAge: number;
 
-  constructor(private heroService: HeroService) { }
+  constructor(private heroService: HeroService, private canDeactivateGuard: CanDeactivateGuard) { }
 
   ngOnInit() {
     this.getHeroes();
+  }
+
+  canDeactivate(): Observable<boolean> | boolean {
+    if (this.inputName || this.inputAge) {
+      return confirm('Your data could be lost, are you sure? (yes/no)');
+    } else {
+      return true;
+    }
   }
 
   getHeroes(): void {

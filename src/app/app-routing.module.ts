@@ -5,15 +5,17 @@ import { DashboardComponent }   from './dashboard/dashboard.component';
 import { HeroesComponent }      from './heroes/heroes.component';
 import { HeroDetailComponent }  from './hero-detail/hero-detail.component';
 
+import { CanDeactivateGuard } from './can-deactivate-guard.service';
+
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'detail/:id', component: HeroDetailComponent },
-  { path: 'heroes', component: HeroesComponent }
+  { path: 'detail/:id', component: HeroDetailComponent, canDeactivate: [CanDeactivateGuard] },
+  { path: 'heroes', component: HeroesComponent, canDeactivate: [CanDeactivateGuard] }
 ];
 
 @NgModule({
-  imports: [ RouterModule.forRoot(routes) ],
+  imports: [ RouterModule.forRoot(routes, { enableTracing: true }) ],
   exports: [ RouterModule ]
 })
 export class AppRoutingModule {}

@@ -4,6 +4,9 @@ import { Location } from '@angular/common';
 
 import { Hero }         from '../hero';
 import { HeroService }  from '../hero.service';
+import { CanDeactivateGuard } from '../can-deactivate-guard.service';
+
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-hero-detail',
@@ -12,11 +15,14 @@ import { HeroService }  from '../hero.service';
 })
 export class HeroDetailComponent implements OnInit {
   showAlert: boolean = false;
+  initName: string;
+  initAge: number;
   @Input() hero: Hero;
 
   constructor(
     private route: ActivatedRoute,
     private heroService: HeroService,
+    private canDeactivateGuard: CanDeactivateGuard,
     private location: Location
   ) {}
 
@@ -24,10 +30,26 @@ export class HeroDetailComponent implements OnInit {
     this.getHero();
   }
 
+  canDeactivate(): Observable<boolean> | boolean {
+    if (this.hero.name !== this.initName || this.hero.age !== this.initAge) {
+      return confirm('Your data could be lost, are you sure? (yes/no)');
+    } else {
+      return true;
+    }
+  }
+
+  setInitValues (): void {
+    this.initName = this.hero.name;
+    this.initAge = this.hero.age;
+  }
+
   getHero(): void {
     const id = +this.route.snapshot.paramMap.get('id');
     this.heroService.getHero(id)
-      .subscribe(hero => this.hero = hero);
+      .subscribe(hero => {
+        this.hero = hero;
+        this.setInitValues();
+      });
   }
 
   goBack(): void {
@@ -35,9 +57,12 @@ export class HeroDetailComponent implements OnInit {
   }
 
  save(): void {
-    if(!this.hero.age || (this.hero.age >= 18 && this.hero.age <= 500)) {
+    if (!this.hero.age || (this.hero.age >= 18 && this.hero.age <= 500)) {
       this.heroService.updateHero(this.hero)
-        .subscribe(() => this.goBack());
+        .subscribe(() => {
+          this.setInitValues();
+          this.goBack();
+        });
       this.showAlert = false;
     } else {
       this.showAlert = true;

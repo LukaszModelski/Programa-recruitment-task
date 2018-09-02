@@ -20,6 +20,7 @@ export class HeroService {
     private http: HttpClient,
     private messageService: MessageService) { }
 
+
   /** GET heroes from the server */
   getHeroes (): Observable<Hero[]> {
     return this.http.get<Hero[]>(this.heroesUrl)
@@ -117,4 +118,5 @@ export class HeroService {
   private log(message: string) {
     this.messageService.add(`HeroService: ${message}`);
   }
+
 }
