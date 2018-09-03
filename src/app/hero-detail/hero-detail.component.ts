@@ -69,4 +69,8 @@ export class HeroDetailComponent implements OnInit {
     }
   }
 
+  getHeroLvl (hero: Hero) {
+    return this.heroService.getHeroLvl(hero);
+  }
+
 }

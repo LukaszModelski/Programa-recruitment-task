@@ -14,6 +14,9 @@ const httpOptions = {
 @Injectable({ providedIn: 'root' })
 export class HeroService {
 
+  getHeroeLvl(): any {
+    throw new Error("Method not implemented.");
+  }
   private heroesUrl = 'api/heroes';  // URL to web api
 
   constructor(
@@ -92,6 +95,20 @@ export class HeroService {
       tap(_ => this.log(`updated hero id=${hero.id}`)),
       catchError(this.handleError<any>('updateHero'))
     );
+  }
+
+  getHeroLvl (hero: Hero) {
+    if (hero.age) {
+      if (hero.age < 100) {
+        return 'junior';
+      } else if (hero.age >= 100 && hero.age < 250) {
+        return 'professional';
+      } else if (hero.age >= 250) {
+        return 'expert';
+      }
+    } else {
+      return undefined;
+    }
   }
 
   /**

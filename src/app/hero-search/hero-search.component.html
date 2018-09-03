@@ -5,11 +5,8 @@
 
     <ul *ngIf="searchBox.value.length >= 1" class="search-result">
       <li *ngFor="let hero of heroes$ | async">
-        <a [ngSwitch]="true" routerLink="/detail/{{hero.id}}">
-          <span *ngSwitchCase="!hero.age">{{hero.name}}</span>
-          <span *ngSwitchCase="hero.age < 100" class="green">{{hero.name}}</span>
-          <span *ngSwitchCase="hero.age >= 100 && hero.age < 250" class="black">{{hero.name}}</span>
-          <span *ngSwitchCase="hero.age >= 250" class="blue">{{hero.name}}</span>
+        <a routerLink="/detail/{{hero.id}}">
+          <span [ngClass]="getHeroLvl(hero)+'-color'">{{hero.name}}</span>
         </a>
       </li>
     </ul>

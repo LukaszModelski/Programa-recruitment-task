@@ -70,13 +70,16 @@ nav a.active {
 .red {
   color: #f00;
 }
-.blue {
+.blue,
+.expert-color {
   color: #00f;
 }
-.green {
+.green,
+.junior-color {
   color: #0f0;
 }
-.black {
+.black,
+.professional-color {
   color: #000;
 }
 .d-block {
