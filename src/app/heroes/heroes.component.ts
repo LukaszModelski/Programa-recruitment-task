@@ -30,7 +30,7 @@ export class HeroesComponent implements OnInit {
   }
 
   canDeactivate(): Observable<boolean> | boolean {
-    if (this.inputName || this.inputAge) {
+    if (this.profileForm.value.inputName || this.profileForm.value.inputAge) {
       return confirm('Your data could be lost, are you sure? (yes/no)');
     } else {
       return true;
