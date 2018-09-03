@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
 
 import { Hero } from '../hero';
 import { HeroService } from '../hero.service';
@@ -16,6 +17,11 @@ export class HeroesComponent implements OnInit {
   showAlert: boolean = false;
   inputName: string = '';
   inputAge: number;
+
+  profileForm = new FormGroup({
+    inputName: new FormControl(''),
+    inputAge: new FormControl(''),
+  });
 
   constructor(private heroService: HeroService, private canDeactivateGuard: CanDeactivateGuard) { }
 
@@ -36,7 +42,9 @@ export class HeroesComponent implements OnInit {
     .subscribe(heroes => this.heroes = heroes);
   }
 
-  add(name: string, age: number): void {
+  add(): void {
+    let name = this.profileForm.value.inputName;
+    const age = this.profileForm.value.inputAge;
     name = name.trim();
     if (!name) { return; }
     if (age && (age < 18 || age > 500)) {
@@ -44,8 +52,10 @@ export class HeroesComponent implements OnInit {
       return;
     } else {
       this.showAlert = false;
-      this.inputName = '';
-      this.inputAge = undefined;
+      this.profileForm.patchValue({
+        inputName: ' ',
+        inputAge: undefined
+      });
     }
     this.heroService.addHero({ name, age } as Hero)
       .subscribe(hero => {

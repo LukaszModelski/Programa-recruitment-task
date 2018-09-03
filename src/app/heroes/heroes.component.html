@@ -1,17 +1,17 @@
 <h2>My Heroes</h2>
 
 <div>
-  <label>Hero name:
-    <input [(ngModel)]="inputName" #ctrl="ngModel"/>
-  </label>
-  <label>Hero age:
-    <input type="number" [(ngModel)]="inputAge" #ctrl="ngModel" />
-  </label>
-  <!-- (click) passes input value to add() and then clears the input -->
-  <!-- <button (click)="add(heroName.value, heroAge.value); heroName.value=''; heroAge.value=''"> -->
-  <button (click)="add(inputName, inputAge);">
-    add
-  </button>
+  <form [formGroup]="profileForm" (ngSubmit)="add()">
+    <label>Hero name:
+      <input formControlName="inputName"/>
+    </label>
+    <label>Hero age:
+      <input type="number" formControlName="inputAge" />
+    </label>
+    <button type="submit">
+      add
+    </button>
+  </form>
   <p *ngIf="showAlert" class="red">Hero must be at least 18 years old, and cannot be older that 500 years</p>
 </div>
 
@@ -21,12 +21,7 @@
       <span class="badge">{{hero.id}} </span>
       {{hero.name}}
       <span *ngIf="hero.age">, age: {{hero.age}}</span>
-      <!-- <span [ngSwitch]="true" *ngIf="hero.age">
-        <span *ngSwitchCase="hero.age < 100" class="green">, lvl: junior</span>
-        <span *ngSwitchCase="hero.age >= 100 && hero.age < 250" class="black">, lvl: professional</span>
-        <span *ngSwitchCase="hero.age >= 250" class="blue">, lvl: expert</span>
-      </span> -->
-      <span [ngClass]="getHeroLvl(hero)+'-color'"> Lvl: {{getHeroLvl(hero)}}</span>
+      <span *ngIf="hero.age" [ngClass]="getHeroLvl(hero)+'-color'"> Lvl: {{getHeroLvl(hero)}}</span>
     </a>
     <button class="delete" title="delete hero"
       (click)="delete(hero)">x</button>
