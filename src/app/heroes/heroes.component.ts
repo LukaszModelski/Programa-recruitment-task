@@ -3,7 +3,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 
 import { Hero } from '../hero';
 import { HeroService } from '../hero.service';
-import { CanDeactivateGuard } from '../can-deactivate-guard.service';
+import { CanDeactivateGuardService } from '../can-deactivate-guard.service';
 
 import { Observable, of } from 'rxjs';
 
@@ -23,7 +23,7 @@ export class HeroesComponent implements OnInit {
     inputAge: new FormControl(''),
   });
 
-  constructor(private heroService: HeroService, private canDeactivateGuard: CanDeactivateGuard) { }
+  constructor(private heroService: HeroService, private canDeactivateGuard: CanDeactivateGuardService) { }
 
   ngOnInit() {
     this.getHeroes();

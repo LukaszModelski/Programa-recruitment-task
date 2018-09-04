@@ -5,13 +5,13 @@ import { DashboardComponent }   from './dashboard/dashboard.component';
 import { HeroesComponent }      from './heroes/heroes.component';
 import { HeroDetailComponent }  from './hero-detail/hero-detail.component';
 
-import { CanDeactivateGuard } from './can-deactivate-guard.service';
+import { CanDeactivateGuardService } from './can-deactivate-guard.service';
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'detail/:id', component: HeroDetailComponent, canDeactivate: [CanDeactivateGuard] },
-  { path: 'heroes', component: HeroesComponent, canDeactivate: [CanDeactivateGuard] }
+  { path: 'detail/:id', component: HeroDetailComponent, canDeactivate: [CanDeactivateGuardService] },
+  { path: 'heroes', component: HeroesComponent, canDeactivate: [CanDeactivateGuardService] }
 ];
 
 @NgModule({

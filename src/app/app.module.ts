@@ -15,6 +15,7 @@ import { HeroDetailComponent }  from './hero-detail/hero-detail.component';
 import { HeroesComponent }      from './heroes/heroes.component';
 import { HeroSearchComponent }  from './hero-search/hero-search.component';
 import { MessagesComponent }    from './messages/messages.component';
+import { CanDeactivateGuard } from './can-deactivate-guard.service';
 
 @NgModule({
   imports: [
@@ -39,6 +40,7 @@ import { MessagesComponent }    from './messages/messages.component';
     MessagesComponent,
     HeroSearchComponent
   ],
+  // providers: [CanDeactivateGuard],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

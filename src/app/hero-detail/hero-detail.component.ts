@@ -5,7 +5,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 
 import { Hero }         from '../hero';
 import { HeroService }  from '../hero.service';
-import { CanDeactivateGuard } from '../can-deactivate-guard.service';
+import { CanDeactivateGuardService } from '../can-deactivate-guard.service';
 
 import { Observable, of } from 'rxjs';
 
@@ -27,7 +27,7 @@ export class HeroDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private heroService: HeroService,
-    private canDeactivateGuard: CanDeactivateGuard,
+    private canDeactivateGuard: CanDeactivateGuardService,
     private location: Location
   ) {}
 
