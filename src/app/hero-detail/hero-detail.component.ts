@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { FormGroup, FormControl } from '@angular/forms';
 
 import { Hero }         from '../hero';
 import { HeroService }  from '../hero.service';
@@ -15,8 +16,12 @@ import { Observable, of } from 'rxjs';
 })
 export class HeroDetailComponent implements OnInit {
   showAlert: boolean = false;
-  initName: string;
-  initAge: number;
+
+  profileForm = new FormGroup({
+    inputName: new FormControl(''),
+    inputAge: new FormControl(''),
+  });
+
   @Input() hero: Hero;
 
   constructor(
@@ -31,16 +36,11 @@ export class HeroDetailComponent implements OnInit {
   }
 
   canDeactivate(): Observable<boolean> | boolean {
-    if (this.hero.name !== this.initName || this.hero.age !== this.initAge) {
+    if (this.hero.name !== this.profileForm.value.inputName || this.hero.age !== this.profileForm.value.inputAge) {
       return confirm('Your data could be lost, are you sure? (yes/no)');
     } else {
       return true;
     }
-  }
-
-  setInitValues (): void {
-    this.initName = this.hero.name;
-    this.initAge = this.hero.age;
   }
 
   getHero(): void {
@@ -48,7 +48,10 @@ export class HeroDetailComponent implements OnInit {
     this.heroService.getHero(id)
       .subscribe(hero => {
         this.hero = hero;
-        this.setInitValues();
+        this.profileForm.patchValue({
+          inputName: hero.name,
+          inputAge: hero.age
+        });
       });
   }
 
@@ -57,10 +60,12 @@ export class HeroDetailComponent implements OnInit {
   }
 
  save(): void {
-    if (!this.hero.age || (this.hero.age >= 18 && this.hero.age <= 500)) {
+    if (!this.profileForm.value.inputAge || (this.profileForm.value.inputAge >= 18 && this.profileForm.value.inputAge <= 500)) {
+      this.hero.name = this.profileForm.value.inputName;
+      this.hero.age = this.profileForm.value.inputAge;
+
       this.heroService.updateHero(this.hero)
         .subscribe(() => {
-          this.setInitValues();
           this.goBack();
         });
       this.showAlert = false;

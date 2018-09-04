@@ -1,16 +1,16 @@
 <div *ngIf="hero">
-  <h2>{{hero.name | uppercase}} Details</h2>
+  <h2>{{profileForm.value.inputName | uppercase}} Details</h2>
   <div><span>id: </span>{{hero.id}}</div>
-  <div>
+  <form [formGroup]="profileForm" (ngSubmit)="save()">
     <label class="d-block">name:
-      <input [(ngModel)]="hero.name" placeholder="name"/>
+      <input formControlName="inputName" placeholder="name"/>
     </label>
     <label class="d-block">age:
-      <input [(ngModel)]="hero.age" placeholder="age"/>
+      <input formControlName="inputAge" placeholder="age"/>
     </label>
-  </div>
-  <p *ngIf="hero.age">Hero lvl:<span [ngClass]="getHeroLvl(hero)+'-color'"> {{getHeroLvl(hero)}}</span></p>
-  <p *ngIf="showAlert" class="red">Hero must be at least 18 years old, and cannot be older that 500 years</p>
-  <button (click)="goBack()">go back</button>
-  <button (click)="save()">save</button>
+    <p *ngIf="profileForm.value.inputAge">Hero lvl:<span [ngClass]="getHeroLvl({name: profileForm.value.inputName, age: profileForm.value.inputAge })+'-color'"> {{getHeroLvl({name: profileForm.value.inputName, age: profileForm.value.inputAge })}}</span></p>
+    <p *ngIf="showAlert" class="red">Hero must be at least 18 years old, and cannot be older that 500 years</p>
+    <button (click)="goBack()">go back</button>
+    <button type="submit">save</button>
+  </form>
 </div>
